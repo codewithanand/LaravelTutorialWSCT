@@ -46,9 +46,17 @@ class CustomerController extends Controller
         return redirect('/customer/view');
     }
 
-    public function view(){
-        $customers = Customer::all();
-        $data = compact('customers');
+    public function view(Request $request){
+        $search = $request['search'] ?? "";
+        if($search != ""){
+            $customers = Customer::where('name', 'LIKE', "%$search%")->orwhere('email', 'LIKE', "%$search%")->get();
+        }
+        else{
+            // $customers = Customer::all();
+            // $customers = Customer::paginate(20);
+            $customers = Customer::simplePaginate(20); // Only prev and next buttons
+        }
+        $data = compact('customers', 'search');
         return view('customer-view')->with($data);
     }
 
@@ -76,7 +84,7 @@ class CustomerController extends Controller
 
     public function update($id, Request $request){
         $customer = Customer::find($id);
-        
+
         $customer->name = $request['cname'];
         $customer->email = $request['email'];
         $customer->gender = $request['gender'];
