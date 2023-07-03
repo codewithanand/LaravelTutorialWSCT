@@ -99,9 +99,12 @@ Route::post('/upload', function(Request $request){
     // echo '<pre>';
     // print_r($request->all());
     // echo '</pre>';
+
     // $request->file('image')->store('uploads'); // default upload with random name
+
     // $filename = 'fh-'.time().'.'.$request->file('image')->getClientOriginalExtension(); // with original extension
     $filename = 'fh-'.time().'.jpg'; // with specific extension
     $request->file('image')->storeAs('uploads/img', $filename);
+
     return redirect('/upload');
 });
