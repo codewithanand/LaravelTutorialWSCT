@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\SingleActionController;
@@ -60,7 +61,8 @@ Route::post('/register', [UserController::class, 'register']);
 //     echo '</pre>';
 // });
 
-Route::get('/', function () {
+Route::get('/{lang?}', function ($lang = null) {
+    App::setlocale($lang);
     return view('home');
 });
 
