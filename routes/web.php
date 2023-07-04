@@ -25,13 +25,13 @@ use App\Http\Controllers\IndexController;
 |
 */
 
-Route::middleware(['guard',])->group(function () {
-    Route::get('/data', [IndexController::class, 'index']);
-    Route::get('/group', [IndexController::class, 'group']);
-});
+// Route::middleware(['guard',])->group(function () {
+//     Route::get('/data', [IndexController::class, 'index']);
+//     Route::get('/group', [IndexController::class, 'group']);
+// });
 
-// Route::get('/data', [IndexController::class, 'index'])->middleware('guard');
-// Route::get('/group', [IndexController::class, 'group'])->middleware('guard');
+Route::get('/data', [IndexController::class, 'index'])->middleware('guard');
+Route::get('/group/{id}', [IndexController::class, 'group'])->middleware('guard');
 
 Route::get('/login', function(){
     session()->put('user_id', '1');
