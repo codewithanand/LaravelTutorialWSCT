@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\CustomerController;
 
+use App\Http\Controllers\IndexController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,9 @@ use App\Http\Controllers\CustomerController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/data', [IndexController::class, 'index']);
+Route::get('/group', [IndexController::class, 'group']);
 
 // Route::get('/welcome', function () {
 //     return view('welcome');
@@ -113,3 +118,5 @@ Route::post('/upload', function(Request $request){
 
     return redirect('/upload');
 });
+
+
